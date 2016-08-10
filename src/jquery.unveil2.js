@@ -7,7 +7,9 @@
  * Copyright 2015 Joram van den Boezem
  * https://github.com/nabble/unveil2
  */
-(function ($) {
+
+// Edited to take jquery as a param instead of realying on window in lazyLoad binding
+module.exports = function ($) {
 
     "use strict";
 
@@ -21,24 +23,24 @@
      */
     var unveilString = 'unveil',
 
-    /**
-     * Store the string 'src' in a variable to save some bytes
-     */
+        /**
+         * Store the string 'src' in a variable to save some bytes
+         */
         srcString = 'src',
 
-    /**
-     * Store the string 'placeholder' in a variable to save some bytes
-     */
+        /**
+         * Store the string 'placeholder' in a variable to save some bytes
+         */
         placeholderString = 'placeholder',
 
-    /**
-     * A jQuery collection of images which will be lazy loaded
-     */
+        /**
+         * A jQuery collection of images which will be lazy loaded
+         */
         images = $(),
 
-    /**
-     * A flag to set initialized state, so we can set global listeners only once
-     */
+        /**
+         * A flag to set initialized state, so we can set global listeners only once
+         */
         initialized = false;
 
     /**
@@ -127,7 +129,7 @@
                 });
 
                 // Change classes
-                $this.addClass(unveilString + '-loading');
+                classLoading($this);
 
                 // Fire up the callback if it's a function...
                 if (typeof settings.loading === 'function') {
@@ -175,6 +177,15 @@
          * # HELPER FUNCTIONS
          * ---
          */
+
+        /**
+         * Sets the classes when an image is loading
+         *
+         * @param {object} $elm
+         */
+        function classLoading($elm) {
+            $elm.addClass(unveilString + '-loading');
+        }
 
         /**
          * Sets the classes when an image is done loading
@@ -326,4 +337,4 @@
 
     };
 
-})(window.jQuery);
+};
